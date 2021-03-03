@@ -1,0 +1,29 @@
+/* .friends {
+  display: flex;
+  text-align: center;
+  list-style: none;
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+.status::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+  background: red;
+  display: flex;
+}
+.green::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  /* border: 2px solid red; */
+/* border-radius: 50%;
+  background: green;
+  display: flex;
+} */
