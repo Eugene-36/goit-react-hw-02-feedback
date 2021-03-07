@@ -1,33 +1,60 @@
+import { Component } from "react";
 import "./App.css";
-// import Profile from "./components/Profile/Profile";
-// import Statistics from "./components/Statistics/Statistics";
-// import FriendList from "./components/FriendsList/FriendsList";
-// import Transaction from "./components/TransactionHistory/TransactionHistory";
-// import userJson from "./db/db.user.json";
-// import statistics from "./db/db.statistics.json";
-// import friends from "./db/db.friends.json";
-// import transactionObj from "./db/db.transactionHistory.json";
-//todo: Вторая дз
-import FeedBack from "./components/FeedBack/FeedBack";
-console.log(FeedBack);
 
-function App() {
-  //const { name, tag, location, avatar, stats } = userJson;
-  return (
-    <div className="App">
-      {/* <Profile
-        name={name}
-        tag={tag}
-        location={location}
-        avatar={avatar}
-        stats={stats}
-      />
-      <Statistics title="Upload stats" stats={statistics} />
-      <Statistics stats={statistics} />
-      <FriendList friends={friends} />
-      <Transaction items={transactionObj} /> */}
-    </div>
-  );
+//todo: Вторая дз
+import FeedbackOptions from "./components/FeedBack/FeedBack";
+import Statistics from "./components/FeedBack/Statistics";
+import Section from "./components/FeedBack/SectionTitle";
+import Notification from "./components/FeedBack/Notification";
+class App extends Component {
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+  countFeedback = (e) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      ...{ [e.target.textContent]: prevState[e.target.textContent] + 1 },
+    }));
+  };
+
+  countTotalFeedback = () => {
+    const { good, bad, neutral } = this.state;
+    return good + bad + neutral;
+  };
+  countPositiveFeedbackPercentage() {
+    const { good, bad, neutral } = this.state;
+    let v = (good / (good + bad + neutral)) * 100;
+    return Math.round(v);
+  }
+  render() {
+    const { good, neutral, bad } = this.state;
+    return (
+      <div className="App">
+        <Section title="Please leave your feedback">
+          <FeedbackOptions
+            options={(good, neutral, bad)}
+            onLeaveFeedback={this.countFeedback}
+          />
+        </Section>
+
+        <Section title="">
+          {this.countTotalFeedback() === 0 ? (
+            <Notification message="No feedback given" />
+          ) : (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          )}
+        </Section>
+      </div>
+    );
+  }
 }
 
 export default App;
