@@ -1,4 +1,4 @@
-//import s from "./FeedBack.module.css";
+import s from "./FeedBack.module.css";
 
 const Statistics = ({ good, neutral, bad, onLeaveFeedback }) => {
   const buttons = { good, neutral, bad };

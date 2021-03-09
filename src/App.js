@@ -1,7 +1,7 @@
 import { Component } from "react";
 import "./App.css";
 
-//todo: Вторая дз
+//todo: Второе дз
 import FeedbackOptions from "./components/FeedBack/FeedBack";
 import Statistics from "./components/FeedBack/Statistics";
 import Section from "./components/FeedBack/SectionTitle";
